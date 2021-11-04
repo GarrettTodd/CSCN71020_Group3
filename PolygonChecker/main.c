@@ -79,7 +79,7 @@ void CreateRectangle()
 	int BottomRighrcornerX;
 	int BottomLeftcornerY;
 	int BottomLeftcornerX;
-
+	printf("\n");
 	printf("Enter your First X coordinate: ");
 
 	if (scanf("%d", &x1) != 1)
@@ -219,8 +219,7 @@ void CreateRectangle()
 		{
 			TopleftcornerY = y1;
 			TopLeftcornerX = x1;
-			x1 = -1;
-			x2 = -1;
+			
 		}
 	}
 
@@ -230,8 +229,7 @@ void CreateRectangle()
 		{
 			TopleftcornerY = y2;
 			TopLeftcornerX = x2;
-			y2 = -1;
-			x2 = -1;
+			
 		}
 	}
 
@@ -241,8 +239,7 @@ void CreateRectangle()
 		{
 			TopleftcornerY = y3;
 			TopLeftcornerX = x3;
-			x3 = -1;
-			y3 = -1;
+			
 		}
 	}
 
@@ -252,8 +249,7 @@ void CreateRectangle()
 		{
 			TopleftcornerY = y4;
 			TopLeftcornerX = x4;
-			x4 = -1;
-			y4 = -1;
+			
 		}
 	}
 
@@ -265,16 +261,14 @@ void CreateRectangle()
 	{
 		TopRightcornerY = y1;
 		TopRightcornerX = x1;
-		y1 = -1;
-		x1 = -1;
+		
 	}
 
 	if (TopleftcornerY == y2 && TopLeftcornerX < x2)
 	{
 		TopRightcornerY = y2;
 		TopRightcornerX = x2;
-		y2 = -1;
-		x2 = -1;
+		
 
 	}
 
@@ -282,8 +276,7 @@ void CreateRectangle()
 	{
 		TopRightcornerY = y3;
 		TopRightcornerX = x3;
-		x3 = -1;
-		y3 = -1;
+		
 
 	}
 
@@ -292,8 +285,7 @@ void CreateRectangle()
 	{
 		TopRightcornerY = y4;
 		TopRightcornerX = x4;
-		x4 = -1;
-		y4 = -1;
+		
 	}
 
 
@@ -343,38 +335,83 @@ void CreateRectangle()
 	{
 		BottomLeftcornerX = x4;
 		BottomLeftcornerY = y4;
+	} 
+
+	if (TopLeftcornerX != BottomLeftcornerX || TopleftcornerY != TopRightcornerY)
+	{
+		printf("\nInvaild\n");
+		exit(1);
+	} 
+
+	if (TopRightcornerX != BottomRighrcornerX )
+	{
+		printf("\nInvaild\n");
+		exit(1);
+	} 
+
+	if (BottomLeftcornerY != BottomLeftcornerY)
+	{
+		printf("\nInvaild\n");
+		exit(1);
 	}
+
 
 	printf("\n\n");
 
 	printf("A");
 
-	int toplength = TopRightcornerX - TopLeftcornerX;
+	int toplength = TopRightcornerX - TopLeftcornerX; 
+
+	if (toplength < 0)
+	{
+		printf("\nInvaild!");
+		exit(1);
+	}
 
 	for (int index = 0; index < toplength; index++)
 	{
-		printf("-");
+		printf("--");
 	}
 	printf("B\n");
 
-	int Sidelength = TopRightcornerY - BottomRightcornerY;
+	int Sidelength = TopRightcornerY - BottomRightcornerY; 
+
+	if (Sidelength < 0)
+	{
+		printf("\nInvaild");
+		exit(1);
+	}
 
 	for (int index = 0; index < Sidelength; index++)
 	{
+		if (index == 0)
+		{
+			
+			printf("\r|");
+			for (int index = 0; index < toplength; index++)
+			{
+				printf("  ");
+			}
+		}
 		printf("|\n\r|");
 		for (int index = 0; index < toplength; index++)
 		{
-			printf(" ");
+			printf("  ");
 		}
 
 	}
 
-	printf("C");
+	for (int index = 0; index < toplength; index++)
+	{
+		printf("\b");
+	}
+
+	printf("\rC");
 
 	for (int index = 0; index < toplength; index++)
 	{
 
-		printf("-");
+		printf("--");
 	}
 
 
@@ -382,7 +419,7 @@ void CreateRectangle()
 	printf("D");
 
 
-	printf("\ndone!");
+	
 
 
 
