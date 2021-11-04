@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdio.h>
 #include <stdbool.h>
 
 #include "main.h"
@@ -71,18 +72,18 @@ int* getTriangleSides(int* triangleSides) {
 void CreateRectangle()
 {
 	int x1, y1, x2, y2, x3, y3, x4, y4;
-	int TopleftcornerY;
-	int TopRightcornerY;
-	int TopLeftcornerX;
-	int TopRightcornerX;
-	int BottomRightcornerY;
-	int BottomRighrcornerX;
-	int BottomLeftcornerY;
-	int BottomLeftcornerX;
+	int TopleftcornerY = 0;
+	int TopRightcornerY =0;
+	int TopLeftcornerX = 0;
+	int TopRightcornerX =0;
+	int BottomRightcornerY=0;
+	int BottomRighrcornerX=0;
+	int BottomLeftcornerY=0;
+	int BottomLeftcornerX=0;
 	printf("\n");
 	printf("Enter your First X coordinate: ");
 
-	if (scanf("%d", &x1) != 1)
+	if (scanf("%d", &x1) != 1) // checking to see if input is an integer
 	{
 		printf("\nInvaild!\n");
 
@@ -163,7 +164,7 @@ void CreateRectangle()
 
 	}
 
-	if (x1 == x2 && y1 == y2)
+	if (x1 == x2 && y1 == y2) // checking to make sure points aren't equal
 	{
 		printf("\nInvaild!\n");
 
@@ -205,7 +206,7 @@ void CreateRectangle()
 		exit(1);
 	}
 
-	if (x1 < 0 || x2 < 0 || x3 < 0 || x4 < 0 || y1 < 0 || y2 < 0 || y3 < 0 || y4 < 0)
+	if (x1 < 0 || x2 < 0 || x3 < 0 || x4 < 0 || y1 < 0 || y2 < 0 || y3 < 0 || y4 < 0) //checking to make sure input is not negative
 	{
 		printf("\nInvaild!\n");
 
@@ -213,18 +214,20 @@ void CreateRectangle()
 	}
 
 
-	if (y1 >= y2 && y1 >= y3 && y1 >= y4)
+	if (y1 >= y2 && y1 >= y3 && y1 >= y4) //finding topleft
 	{
 		if (x1 <= x2 && x1 <= x3 && x1 <= x4)
 		{
 			TopleftcornerY = y1;
 			TopLeftcornerX = x1;
 			
-		}
+		} 
+		
 	}
 
-	if (y2 >= y1 && y2 >= y3 && y2 >= y4)
+	else if (y2 >= y1 && y2 >= y3 && y2 >= y4) 
 	{
+	
 		if (x2 <= x1 && x2 <= x3 && x2 <= x4)
 		{
 			TopleftcornerY = y2;
@@ -233,8 +236,9 @@ void CreateRectangle()
 		}
 	}
 
-	if (y3 >= y1 && y3 >= y2 && y3 >= y4)
+	else if (y3 >= y1 && y3 >= y2 && y3 >= y4) 
 	{
+	
 		if (x3 <= x1 && x3 <= x2 && x3 <= x4)
 		{
 			TopleftcornerY = y3;
@@ -243,7 +247,7 @@ void CreateRectangle()
 		}
 	}
 
-	if (y4 >= y1 && y4 >= y2 && y4 >= y3)
+	else if (y4 >= y1 && y4 >= y2 && y4 >= y3)
 	{
 		if (x4 <= x1 && x4 <= x2 && x4 <= x3)
 		{
@@ -253,18 +257,25 @@ void CreateRectangle()
 		}
 	}
 
+	else 
+	{
+	
+		printf("\nInvaild!");
+		exit(1);
+	
+	}
 
 
 
 
-	if (TopleftcornerY == y1 && TopLeftcornerX < x1)
+	if (TopleftcornerY == y1 && TopLeftcornerX < x1) //finding top right
 	{
 		TopRightcornerY = y1;
 		TopRightcornerX = x1;
 		
 	}
 
-	if (TopleftcornerY == y2 && TopLeftcornerX < x2)
+	else if (TopleftcornerY == y2 && TopLeftcornerX < x2)
 	{
 		TopRightcornerY = y2;
 		TopRightcornerX = x2;
@@ -272,7 +283,7 @@ void CreateRectangle()
 
 	}
 
-	if (TopleftcornerY == y3 && TopLeftcornerX < x3)
+	else if (TopleftcornerY == y3 && TopLeftcornerX < x3)
 	{
 		TopRightcornerY = y3;
 		TopRightcornerX = x3;
@@ -286,58 +297,73 @@ void CreateRectangle()
 		TopRightcornerY = y4;
 		TopRightcornerX = x4;
 		
+	} 
+	else
+	{
+		printf("\nInvaild!");
+		exit(1);
 	}
 
 
-	if (TopRightcornerX == x1 && TopRightcornerY > y1)
+	if (TopRightcornerX == x1 && TopRightcornerY > y1) //finding bottom right
 	{
 		BottomRighrcornerX = x1;
 		BottomRightcornerY = y1;
 	}
 
-	if (TopRightcornerX == x2 && TopRightcornerY > y2)
+	else if (TopRightcornerX == x2 && TopRightcornerY > y2)
 	{
 		BottomRighrcornerX = x2;
 		BottomRightcornerY = y2;
 	}
 
-	if (TopRightcornerX == x3 && TopRightcornerY > y3)
+	else if (TopRightcornerX == x3 && TopRightcornerY > y3)
 	{
 		BottomRighrcornerX = x3;
 		BottomRightcornerY = y3;
 	}
 
-	if (TopRightcornerX == x4 && TopRightcornerY > y4)
+	else if (TopRightcornerX == x4 && TopRightcornerY > y4)
 	{
 		BottomRighrcornerX = x4;
 		BottomRightcornerY = y4;
 	}
+	else
+	{
+		printf("\nInvaild!");
+		exit(1);
+	}
 
-	if (TopLeftcornerX == x1 && TopleftcornerY > y1)
+	if (TopLeftcornerX == x1 && TopleftcornerY > y1) //finding bottom left
 	{
 		BottomLeftcornerX = x1;
 		BottomLeftcornerY = y1;
 	}
 
-	if (TopLeftcornerX == x2 && TopleftcornerY > y2)
+	else if (TopLeftcornerX == x2 && TopleftcornerY > y2)
 	{
 		BottomLeftcornerX = x2;
 		BottomLeftcornerY = y2;
 	}
 
-	if (TopLeftcornerX == x3 && TopleftcornerY > y3)
+	else if (TopLeftcornerX == x3 && TopleftcornerY > y3)
 	{
 		BottomLeftcornerX = x3;
 		BottomLeftcornerY = y3;
 	}
 
-	if (TopLeftcornerX == x4 && TopleftcornerY > y4)
+	else if (TopLeftcornerX == x4 && TopleftcornerY > y4)
 	{
 		BottomLeftcornerX = x4;
 		BottomLeftcornerY = y4;
 	} 
+	else
+	{
+		printf("\nInvaild!");
+		exit(1);
+	}
 
-	if (TopLeftcornerX != BottomLeftcornerX || TopleftcornerY != TopRightcornerY)
+	if (TopLeftcornerX != BottomLeftcornerX || TopleftcornerY != TopRightcornerY) // checking if corners align
 	{
 		printf("\nInvaild\n");
 		exit(1);
@@ -367,7 +393,7 @@ void CreateRectangle()
 		printf("\nInvaild!");
 		exit(1);
 	}
-
+	// creating rectangle
 	for (int index = 0; index < toplength; index++)
 	{
 		printf("--");
