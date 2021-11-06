@@ -3,14 +3,12 @@
 
 #include "rectangleSolver.h"
 
-bool analyzeRectangle(int rectanglePoints[][2]) {
-    for (int i = 0; i < 4; i++) {
-        if (!findMatchingPoints(rectanglePoints[i][X], rectanglePoints[i][Y], rectanglePoints)) {
-            printf_s("Not a rectangle.\n");
-            return false;
-        }
+bool analyzeRectangle(int rectanglePoints[][2]) { //took out for loop as checking for matching points once is enough
+    if (!findMatchingPoints(rectanglePoints[X][X], rectanglePoints[X][Y], rectanglePoints)) {
+        printf_s("Not a rectangle.\n");
+        return false;
     }
-
+        
     sortPoints(rectanglePoints);
     printRectangle(rectanglePoints);
     return true;

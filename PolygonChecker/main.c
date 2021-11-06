@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h> //to use exit() function
 
 #include "main.h"
 #include "triangleSolver.h"
 #include "rectangleSolver.h"
 
-int side = 0;
 
 int main() {
 	bool continueProgram = true;
@@ -71,8 +70,14 @@ int printShapeMenu() {
 	int shapeChoice;
 
 	printf_s("Enter number: ");
-	scanf_s("%1o", &shapeChoice);
-
+	int numericInput = scanf_s("%d", &shapeChoice);
+	
+	//need to figure out how to create this into a loop
+	if (numericInput == 0)
+	{
+		printf_s("You entered a non-numeric character. Program closing...\n");
+		exit(0); //terminates whole program
+	}
 	return shapeChoice;
 }
 
