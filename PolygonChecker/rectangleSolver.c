@@ -18,9 +18,11 @@ bool analyzeRectangle(int rectanglePoints[][2]) { //took out for loop as checkin
 bool findMatchingPoints(int x, int y, int rectanglePoints[][2]) {
     int matches = 0;
     for (int i = 0; i < 4; i++) {
+        // Checks the X coordinate of the point if it matches with the rectangle X coordinates.
         if (x == rectanglePoints[i][X])
             matches++;
 
+        // Checks the Y coordinate of the point if it matches with the rectangle Y coordinates.
         if (y == rectanglePoints[i][Y])
             matches++;
     }
@@ -29,6 +31,7 @@ bool findMatchingPoints(int x, int y, int rectanglePoints[][2]) {
 }
 
 void sortPoints(int rectanglePoints[][2]) {
+    // Sort the X coordinates of the point.
     for (int i = 0; i < 4; i++) {
         for (int j = i; j < 4; j++) {
             if (rectanglePoints[i][X] > rectanglePoints[j][X]) {
@@ -44,6 +47,7 @@ void sortPoints(int rectanglePoints[][2]) {
         }
     }
 
+    // Sort the Y coordinates of the point with respect to the X coordinate.
     for (int i = 0; i < 4; i++) {
         for (int j = i; j < 4; j++) {
             if ((rectanglePoints[i][0] == rectanglePoints[j][0]) && (rectanglePoints[i][1] > rectanglePoints[j][1])) {
@@ -60,6 +64,15 @@ void sortPoints(int rectanglePoints[][2]) {
     }
 }
 
+/*
+    A --- B
+    |     |
+    |     |
+    C --- D
+
+    Width = B - A
+    Height = C - A
+*/
 void printRectangle(int rectanglePoints[][2]) {
     int width = rectanglePoints[B][Y] - rectanglePoints[A][Y];
     int height = rectanglePoints[C][X] - rectanglePoints[A][X];

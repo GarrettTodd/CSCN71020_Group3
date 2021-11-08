@@ -1,11 +1,11 @@
 #pragma once
 
-#define A 0
-#define B 1
-#define C 2
-#define D 3
-#define X 0
-#define Y 1
+#define A 0 // Point A
+#define B 1 // Point B
+#define C 2 // Point C
+#define D 3 // Point D
+#define X 0 // X coordinate
+#define Y 1 // Y coordinate
 
 bool analyzeRectangle(int rectanglePoints[][2]);
 bool findMatchingPoints(int x, int y, int rectanglePoints[][2]);
