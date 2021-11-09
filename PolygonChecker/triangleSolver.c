@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
@@ -9,26 +10,28 @@ char* analyzeTriangle(int side1, int side2, int side3, bool* isTriangle) {
 	if (!largestSide(side1, side2, side3))
 	{
 		result = "Not a triangle";
-		isTriangle = false;
+		*isTriangle = false; 
+		
 	}
 	else if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
 		result = "Not a triangle";
-		isTriangle = false;
+		*isTriangle = false;
+		
 	}
 	else if (side1 == side2 && side1 == side3) {
 		result = "Equilateral triangle";
-		isTriangle = true;
+		*isTriangle = true;
 	}
 	else if ((side1 == side2 && side1 != side3) ||
 		(side1 == side3 && side1 != side2) ||
 		(side2 == side3 && side2 != side1))
 	{
 		result = "Isosceles triangle";
-		isTriangle = true;
+		*isTriangle = true;
 	}
 	else {
 		result = "Scalene triangle";
-		isTriangle = true;
+		*isTriangle = true;
 	}
 
 	return result;

@@ -35,14 +35,15 @@ int main() {
 			bool isTriangle;
 			char* result = analyzeTriangle(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2], &isTriangle);
 			printf_s("%s\n", result);
-			if (isTriangle)
+			if (isTriangle == true)
 			{
 				float angle[3];
 				findingAngles(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2], &angle[0]);
 				findingAngles(triangleSidesPtr[2], triangleSidesPtr[0], triangleSidesPtr[1], &angle[1]);
 				findingAngles(triangleSidesPtr[1], triangleSidesPtr[2], triangleSidesPtr[0], &angle[2]);
 				printf_s("The angles of your triangle are: %f, %f, %f\n", angle[0], angle[1], angle[2]);
-			}
+			} 
+			
 			break;
 		case 0:
 			continueProgram = false;
