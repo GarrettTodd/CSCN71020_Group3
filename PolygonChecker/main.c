@@ -68,18 +68,12 @@ int printShapeMenu() {
 	printf_s("2. Rectangle\n");
 	printf_s("0. Exit\n");
 
-	int shapeChoice;
+	int correctChoice;
 
-	printf_s("Enter number: ");
-	int numericInput = scanf_s("%d", &shapeChoice);
+	correctChoice = vaildatechoice();
+
 	
-	//need to figure out how to create this into a loop
-	if (numericInput == 0)
-	{
-		printf_s("You entered a non-numeric character. Program closing...\n");
-		exit(0); //terminates whole program
-	}
-	return shapeChoice;
+	return correctChoice;
 }
 
 int* getTriangleSides(int* triangleSides) {
@@ -128,4 +122,19 @@ int getValidInput(char prompt[]) {
 			break;
 		}
 	}
+}
+
+int vaildatechoice()
+{
+	int shapechoice;
+	printf_s("Enter number: ");
+	int numericInput = scanf_s("%d", &shapechoice);
+
+	//need to figure out how to create this into a loop
+	if (numericInput == 0)
+	{
+		printf_s("\nYou entered a non-numeric character. Program closing...\n");
+		exit(0); //terminates whole program
+	}
+	return shapechoice;
 }
