@@ -53,10 +53,10 @@ int main(void)
 
 int* getTriangleSides(int* triangleSides)
 {
-	printf_s("Enter the three sides of the triangle: ");
 	for (int i = 0; i < 3; i++)
 	{
-		scanf_s("%d", &triangleSides[i]);
+		printf("Enter side [%d]\n", i + 1);
+		triangleSides[i] = getValidInput("> ");
 	}
 	return triangleSides;
 }
