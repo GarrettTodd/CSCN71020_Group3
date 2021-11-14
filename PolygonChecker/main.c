@@ -24,15 +24,15 @@ int main(void)
 			break;
 		case 1:
 			printf_s("Triangle selected.\n");
-			int triangleSides[3] = { 0, 0, 0 };
-			int* triangleSidesPtr = getTriangleSides(triangleSides);
+			double triangleSides[3] = { 0, 0, 0 };
+			double* triangleSidesPtr = getTriangleSides(triangleSides);
 			//printf_s("! %d\n", triangleSidesPtr[0]);
 			bool isTriangle;
 			char* result = analyzeTriangle(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2], &isTriangle);
 			printf_s("%s\n", result);
 			if (isTriangle == true)
 			{
-				float angle[3];
+				double angle[3];
 				findingAngles(triangleSidesPtr[0], triangleSidesPtr[1], triangleSidesPtr[2], &angle[0]);
 				findingAngles(triangleSidesPtr[2], triangleSidesPtr[0], triangleSidesPtr[1], &angle[1]);
 				findingAngles(triangleSidesPtr[1], triangleSidesPtr[2], triangleSidesPtr[0], &angle[2]);
@@ -51,7 +51,7 @@ int main(void)
 	}
 }
 
-int* getTriangleSides(int* triangleSides)
+double* getTriangleSides(double* triangleSides)
 {
 	for (int i = 0; i < 3; i++)
 	{

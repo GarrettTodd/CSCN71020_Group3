@@ -1,7 +1,7 @@
 #pragma once
 #include <stdbool.h>
 
-char* analyzeTriangle(int side1, int side2, int side3, bool*);
-bool largestSide(int, int, int);
-bool lengthChecker(int, int, int);
-void findingAngles(float, float, float, float*);
+char* analyzeTriangle(double side1, double side2, double side3, bool*);
+bool largestSide(double, double, double);
+bool lengthChecker(double, double, double);
+void findingAngles(double, double, double, double*);

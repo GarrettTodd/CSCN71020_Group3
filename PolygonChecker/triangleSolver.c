@@ -5,7 +5,7 @@
 
 #include "triangleSolver.h"
 
-char* analyzeTriangle(int side1, int side2, int side3, bool* isTriangle) {
+char* analyzeTriangle(double side1, double side2, double side3, bool* isTriangle) {
 	char* result = "";
 	if (!largestSide(side1, side2, side3))
 	{
@@ -42,11 +42,11 @@ char* analyzeTriangle(int side1, int side2, int side3, bool* isTriangle) {
 	return result;
 }
 
-bool largestSide(int side1, int side2, int side3)
+bool largestSide(double side1, double side2, double side3)
 {
 	// This function determins what side length is longest
 	// and calls lengthChecker accordingly then returns the output
-	int largest = side1;
+	double largest = side1;
 	bool smallerSidesAreBigger = lengthChecker(side1, side2, side3);
 	if (side2 > largest)
 	{
@@ -61,7 +61,7 @@ bool largestSide(int side1, int side2, int side3)
 	return smallerSidesAreBigger;
 }
 
-bool lengthChecker(int big, int smaller1, int smaller2)
+bool lengthChecker(double big, double smaller1, double smaller2)
 {
 	// This function has three values passed to it, largest side and the two smaller sides
 	// It then compares the largest side to the sum of the two smaller sides,
@@ -75,13 +75,13 @@ bool lengthChecker(int big, int smaller1, int smaller2)
 	return smallerSidesAreBigger;
 }
 
-void findingAngles(float side1, float side2, float side3, float* angle)
+void findingAngles(double side1, double side2, double side3, double* angle)
 {
 	// This function is called in main, it is passed the three side lengths 
 	// and one of the triangles angles by reference, it calculates and
 	// sets then angle then main displays it. 
-	const float PI = 3.141593;
-	float temporary1 = (((side1 * side1) - (side2 * side2) - (side3 * side3)) / (-2 * side2 * side3));
+	const double PI = 3.141593;
+	double temporary1 = (((side1 * side1) - (side2 * side2) - (side3 * side3)) / (-2 * side2 * side3));
 
 	*angle = acos(temporary1);
 	*angle = *angle * (180 / PI);
