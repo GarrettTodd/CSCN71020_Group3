@@ -1,116 +1,112 @@
-#include <stdio.h>
-#include <stdbool.h>
-
 #include "rectangleSolver.h"
 
-//compares each point with the other points to make sure they create a rectangle
-//x-and-y coordinates to form a rectangle must match up in a particular way to create the shape
-bool analyzeRectangle(int rectanglePoints[][2]) { 
-    for (int i = 0; i < 4; i++)
-    {   //if matches is not 4, then a rectangle can not be formed
-        if (!findMatchingPoints(rectanglePoints[i][X], rectanglePoints[i][Y], rectanglePoints)) {
-            printf_s("Not a rectangle.\n");
-            return false;
-        }
-    }
-        
-    sortPoints(rectanglePoints);
-    printRectangle(rectanglePoints);
-    return true;
+int getValidInput(char prompt[])
+{
+	int input, temp;
+	while (1)
+	{
+		printf("%s", prompt);
+		temp = scanf("%d", &input);
+
+		// Checks if scanf didn't match any input and if the input contained any unwanted trailing characters.
+		if (temp != 1 || getchar() != 10)
+		{
+			while (getchar() != '\n'); // Cleans stdin.
+			printf("Invalid value entered, try again.\n");
+		}
+		else
+			return input;
+	}
 }
 
-// Returns true if there are 4 matches (+2 self match).
-bool findMatchingPoints(int x, int y, int rectanglePoints[][2]) {
-    int matches = 0;
-    for (int i = 0; i < 4; i++) {
-        // Checks the X coordinate of the point if it matches with the rectangle X coordinates.
-        if (x == rectanglePoints[i][X])
-            matches++;
-
-        // Checks the Y coordinate of the point if it matches with the rectangle Y coordinates.
-        if (y == rectanglePoints[i][Y])
-            matches++;
-    }
-
-    return matches == 4 ? true : false;
+void getPoints(Point points[])
+{
+	for (int i = 0; i < MAX_POINTS; i++)
+	{
+		printf("Enter point [%d]\n", i + 1);
+		// Gets the input from user and assigns it to a point.
+		points[i].x = getValidInput("X: ");
+		points[i].y = getValidInput("Y: ");
+	}
 }
 
-void sortPoints(int rectanglePoints[][2]) {
-    // Sort the X coordinates of the point.
-    for (int i = 0; i < 4; i++) {
-        for (int j = i; j < 4; j++) {
-            if (rectanglePoints[i][X] > rectanglePoints[j][X]) {
-                int tempX = rectanglePoints[i][X];
-                int tempY = rectanglePoints[i][Y];
+bool analyzePoints(Point points[])
+{
+	bool Orthogonal[3] = { false }; // Creates a new bool array to hold the return value of each checkOrthogonality.
+	// Checks 3 points at a time and returns true if they form a 90 degree angle or are perpendicular.
+	Orthogonal[0] = checkOrthogonality(points[A], points[B], points[C]) &&
+		checkOrthogonality(points[B], points[C], points[D]) &&
+		checkOrthogonality(points[C], points[D], points[A]);
+	reorderPoints(points); // Changes the order of the points so that we can check every combination.
 
-                rectanglePoints[i][X] = rectanglePoints[j][X];
-                rectanglePoints[i][Y] = rectanglePoints[j][Y];
+	Orthogonal[1] = checkOrthogonality(points[A], points[B], points[C]) &&
+		checkOrthogonality(points[B], points[C], points[D]) &&
+		checkOrthogonality(points[C], points[D], points[A]);
+	reorderPoints(points);
 
-                rectanglePoints[j][X] = tempX;
-                rectanglePoints[j][Y] = tempY;
-            }
-        }
-    }
+	Orthogonal[2] = checkOrthogonality(points[A], points[B], points[C]) &&
+		checkOrthogonality(points[B], points[C], points[D]) &&
+		checkOrthogonality(points[C], points[D], points[A]);
+	reorderPoints(points);
+	sortPoints(points); // Sorts the points so that they are correctly arranged and to prevent any diagonal checks later.
 
-    // Sort the Y coordinates of the point with respect to the X coordinate.
-    for (int i = 0; i < 4; i++) {
-        for (int j = i; j < 4; j++) {
-            if ((rectanglePoints[i][0] == rectanglePoints[j][0]) && (rectanglePoints[i][1] > rectanglePoints[j][1])) {
-                int tempX = rectanglePoints[i][0];
-                int tempY = rectanglePoints[i][1];
-
-                rectanglePoints[i][0] = rectanglePoints[j][0];
-                rectanglePoints[i][1] = rectanglePoints[j][1];
-
-                rectanglePoints[j][0] = tempX;
-                rectanglePoints[j][1] = tempY;
-            }
-        }
-    }
+	return Orthogonal[0] || Orthogonal[1] || Orthogonal[2] ? true : false; // Returns true if at least 1 check returned true.
 }
 
-/*
-    A --- B
-    |     |
-    |     |
-    C --- D
-
-    Width = B - A
-    Height = C - A
-*/
-void printRectangle(int rectanglePoints[][2]) {
-    int width = rectanglePoints[B][Y] - rectanglePoints[A][Y];
-    int height = rectanglePoints[C][X] - rectanglePoints[A][X];
-
-    for (int w = 0; w < width; w++) {
-        printf_s("#");
-    } printf_s("\n");
-
-    if (height > 2) {
-        for (int h = 2; h < height; h++) {
-            printf_s("#");
-            for (int s = 0; s < width - 2; ++s) {
-                printf_s(" ");
-            }
-            printf_s("#\n");
-        }
-    }
-
-    for (int w = 0; w < width; w++) {
-        printf_s("#");
-    } printf_s("\n");
+void reorderPoints(Point points[])
+{
+	// Point 'D' is used as a constant and stays in the same position.
+	Point tempPoint = points[A];
+	points[A] = points[B];
+	points[B] = points[C];
+	points[C] = tempPoint;
 }
 
-int getPerimeter(int rectanglePoints[][2]) {
-    int width = rectanglePoints[B][Y] - rectanglePoints[A][Y];
-    int height = rectanglePoints[C][X] - rectanglePoints[A][X];
-
-    return 2 * (width + height);
+bool checkOrthogonality(Point a, Point b, Point c)
+{
+	int angle = (b.x - a.x) * (b.x - c.x) +
+		(b.y - a.y) * (b.y - c.y);
+	return angle == 0 ? true : false; // Returns true if the angle is equal to 0, which indicates that
+									  // point 'B' forms a 90 degree angle between 'A' and 'C'.
 }
 
-int getArea(int rectanglePoints[][2]) {
-    int width = rectanglePoints[B][Y] - rectanglePoints[A][Y];
-    int height = rectanglePoints[C][X] - rectanglePoints[A][X];
+void sortPoints(Point points[])
+{
+	for (int i = 0; i < MAX_POINTS; i++)
+		for (int j = i; j < MAX_POINTS; j++)
+			if ((points[i].x > points[j].x))
+				swap(points, i, j); // Sorts the points using the x coordinate.
 
-    return width * height;
+	for (int i = 0; i < MAX_POINTS; i++)
+		for (int j = i; j < MAX_POINTS; j++)
+			if ((points[i].y > points[j].y) && (points[i].x == points[j].x))
+				swap(points, i, j); // Sorts the points using the y coordinate with respect to the x coordinate.
+
+	swap(points, C, D); // Swaps the last 2 points to prevent the points from connecting diagonally.
+}
+
+void swap(Point points[], int i, int j)
+{
+	Point tempPoint = points[i];
+	points[i] = points[j];
+	points[j] = tempPoint;
+}
+
+double distanceBetween(Point a, Point b)
+{
+	return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2));
+}
+
+double getPerimeter(Point points[])
+{
+	return distanceBetween(points[A], points[B]) +
+		distanceBetween(points[B], points[C]) +
+		distanceBetween(points[C], points[D]) +
+		distanceBetween(points[D], points[A]);
+}
+
+double getArea(Point points[])
+{
+	return distanceBetween(points[A], points[B]) *
+		distanceBetween(points[B], points[C]);
 }

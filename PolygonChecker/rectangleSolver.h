@@ -1,15 +1,28 @@
 #pragma once
 
-#define A 0 // Point A
-#define B 1 // Point B
-#define C 2 // Point C
-#define D 3 // Point D
-#define X 0 // X coordinate
-#define Y 1 // Y coordinate
+#include <math.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-bool analyzeRectangle(int rectanglePoints[][2]);
-bool findMatchingPoints(int x, int y, int rectanglePoints[][2]);
-void sortPoints(int rectanglePoints[][2]);
-void printRectangle(int rectanglePoints[][2]);
-int getPerimeter(int rectanglePoints[][2]);
-int getArea(int rectanglePoints[][2]);
+#define MAX_POINTS 4
+#define A 0
+#define B 1
+#define C 2
+#define D 3
+
+typedef struct point
+{
+	int x;
+	int y;
+} Point;
+
+int getValidInput(char[]);
+void getPoints(Point[]);
+bool analyzePoints(Point[]);
+void reorderPoints(Point[]);
+bool checkOrthogonality(Point, Point, Point);
+void sortPoints(Point[]);
+void swap(Point[], int, int);
+double distanceBetween(Point, Point);
+double getPerimeter(Point[]);
+double getArea(Point[]);
