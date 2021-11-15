@@ -72,8 +72,8 @@ void printWelcome()
 int printShapeMenu()
 {
 	printf("1. Triangle\n");
-	printf("2. Rectangle\n\n");
-	printf("0. Exit\n");
+	printf("2. Rectangle\n");
+	printf("0. Exit\n\n");
 
 	int choice = getValidInput("> ");
 

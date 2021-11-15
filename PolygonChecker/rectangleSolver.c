@@ -6,7 +6,7 @@ int getValidInput(char prompt[])
 	while (1)
 	{
 		printf("%s", prompt);
-		temp = scanf("%d", &input);
+		temp = scanf_s("%d", &input);
 
 		// Checks if scanf didn't match any input and if the input contained any unwanted trailing characters.
 		if (temp != 1 || getchar() != 10)
