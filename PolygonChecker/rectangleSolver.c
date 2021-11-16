@@ -33,21 +33,15 @@ void getPoints(Point points[])
 bool analyzePoints(Point points[])
 {
 	bool Orthogonal[3] = { false }; // Creates a new bool array to hold the return value of each checkOrthogonality.
-	// Checks 3 points at a time and returns true if they form a 90 degree angle or are perpendicular.
-	Orthogonal[0] = checkOrthogonality(points[A], points[B], points[C]) &&
-		checkOrthogonality(points[B], points[C], points[D]) &&
-		checkOrthogonality(points[C], points[D], points[A]);
-	reorderPoints(points); // Changes the order of the points so that we can check every combination.
+	for (int i = 0; i < 3; i++)
+	{
+		// Checks 3 points at a time and returns true if they form a 90 degree angle or are perpendicular.
+		Orthogonal[i] = checkOrthogonality(points[A], points[B], points[C]) &&
+						checkOrthogonality(points[B], points[C], points[D]) &&
+						checkOrthogonality(points[C], points[D], points[A]);
+		reorderPoints(points); // Changes the order of the points so that we can check every combination.
+	}
 
-	Orthogonal[1] = checkOrthogonality(points[A], points[B], points[C]) &&
-		checkOrthogonality(points[B], points[C], points[D]) &&
-		checkOrthogonality(points[C], points[D], points[A]);
-	reorderPoints(points);
-
-	Orthogonal[2] = checkOrthogonality(points[A], points[B], points[C]) &&
-		checkOrthogonality(points[B], points[C], points[D]) &&
-		checkOrthogonality(points[C], points[D], points[A]);
-	reorderPoints(points);
 	sortPoints(points); // Sorts the points so that they are correctly arranged and to prevent any diagonal checks later.
 
 	return Orthogonal[0] || Orthogonal[1] || Orthogonal[2] ? true : false; // Returns true if at least 1 check returned true.
@@ -94,19 +88,20 @@ void swap(Point points[], int i, int j)
 
 double distanceBetween(Point a, Point b)
 {
-	return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2));
+	return sqrt(pow((double)b.x - (double)a.x, 2) +
+		        pow((double)b.y - (double)a.y, 2));
 }
 
 double getPerimeter(Point points[])
 {
 	return distanceBetween(points[A], points[B]) +
-		distanceBetween(points[B], points[C]) +
-		distanceBetween(points[C], points[D]) +
-		distanceBetween(points[D], points[A]);
+		   distanceBetween(points[B], points[C]) +
+		   distanceBetween(points[C], points[D]) +
+		   distanceBetween(points[D], points[A]);
 }
 
 double getArea(Point points[])
 {
 	return distanceBetween(points[A], points[B]) *
-		distanceBetween(points[B], points[C]);
+		   distanceBetween(points[B], points[C]);
 }
