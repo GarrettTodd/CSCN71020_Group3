@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolygonChecker", "PolygonChecker\PolygonChecker.vcxproj", "{2328FAE1-A1BF-420F-9F0C-C7CCC7F13314}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TriangleSolverTests", "TriangleSolverTests\TriangleSolverTests.vcxproj", "{146A4C16-3642-47C3-A302-8863A35C9885}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolygonCheckerTests", "PolygonCheckerTests\PolygonCheckerTests.vcxproj", "{55F44B1B-2D0B-484F-B405-35C18D50435B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{2328FAE1-A1BF-420F-9F0C-C7CCC7F13314}.Release|x64.Build.0 = Release|x64
 		{2328FAE1-A1BF-420F-9F0C-C7CCC7F13314}.Release|x86.ActiveCfg = Release|Win32
 		{2328FAE1-A1BF-420F-9F0C-C7CCC7F13314}.Release|x86.Build.0 = Release|Win32
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Debug|x64.ActiveCfg = Debug|x64
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Debug|x64.Build.0 = Debug|x64
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Debug|x86.ActiveCfg = Debug|Win32
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Debug|x86.Build.0 = Debug|Win32
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Release|x64.ActiveCfg = Release|x64
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Release|x64.Build.0 = Release|x64
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Release|x86.ActiveCfg = Release|Win32
-		{146A4C16-3642-47C3-A302-8863A35C9885}.Release|x86.Build.0 = Release|Win32
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Debug|x64.ActiveCfg = Debug|x64
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Debug|x64.Build.0 = Debug|x64
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Debug|x86.ActiveCfg = Debug|Win32
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Debug|x86.Build.0 = Debug|Win32
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Release|x64.ActiveCfg = Release|x64
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Release|x64.Build.0 = Release|x64
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Release|x86.ActiveCfg = Release|Win32
+		{55F44B1B-2D0B-484F-B405-35C18D50435B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
