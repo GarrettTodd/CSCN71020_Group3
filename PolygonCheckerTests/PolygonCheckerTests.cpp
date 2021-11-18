@@ -291,10 +291,85 @@ namespace PolygonCheckerTests
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
 			Assert::AreEqual(Expected, angle);
 
+			
+		}
+
+		//Testing largestSide
+
+		TEST_METHOD(largestSide_invalid)
+		{
+			// testing LargestSide() to with invaild side lengths
+			// expected outcome of function:False
+
+			double triangleSides[3] = { 8, 7, 1 };
+			bool NotEqual = true;
+			bool result;
+			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreNotEqual(NotEqual, result);
+
+			
+			
+
+
+		}
+
+		TEST_METHOD(largestSide_Scalene)
+		{
+			// testing LargestSide() with 8,9,4 that form a scalene triangle 
+			// to verify the sum of the smaller sides are larger than the largest side
+			// expected outcome of function:True
+
+			double triangleSides[3] = { 8, 9, 4 };
+			bool Expected = true;
+			bool result;
+			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreEqual(Expected , result);
+
+
 
 
 
 		}
+		TEST_METHOD(largestSide_Equilatoral)
+		{
+			// testing LargestSide() with 7,7,7 that form a Equilatoral triangle 
+			// to verify the sum of the smaller sides are larger than the largest side
+			// expected outcome of function:True
+
+			double triangleSides[3] = { 7, 7, 7};
+			bool NotExpected = false;
+			bool result;
+			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreNotEqual(NotExpected, result);
+
+
+
+
+
+		}
+
+		TEST_METHOD(largestSide_Isosceles)
+		{
+			// testing LargestSide() with 6,6,8 that form a isosceles triangle 
+			// to verify the sum of the smaller sides are larger than the largest side
+			// expected outcome of function:True
+
+			double triangleSides[3] = { 6, 6, 8 };
+			bool NotExpected = false;
+			bool result;
+			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreNotEqual(NotExpected, result);
+
+
+
+
+
+		}
+
 	};
 
 	TEST_CLASS(RectangleTests)
