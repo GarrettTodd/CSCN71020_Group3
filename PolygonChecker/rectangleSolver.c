@@ -32,6 +32,13 @@ void getPoints(Point points[])
 
 bool analyzePoints(Point points[])
 {
+	//Will first check to see if the points entered are all the same and will return false if they are
+	if ((points[A].x == points[B].x && points[A].x == points[C].x && points[A].x == points[D].x) && 
+		(points[A].y == points[B].y && points[A].y == points[C].y && points[A].y == points[D].y))
+	{
+		return false;
+	}
+
 	bool Orthogonal[3] = { false }; // Creates a new bool array to hold the return value of each checkOrthogonality.
 	for (int i = 0; i < 3; i++)
 	{
