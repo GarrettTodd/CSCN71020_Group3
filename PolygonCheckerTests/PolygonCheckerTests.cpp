@@ -2,6 +2,8 @@
 #include "CppUnitTest.h"
 
 #include <stdbool.h>
+#include <math.h>
+#include <float.h>
 
 extern "C"
 {
@@ -140,14 +142,16 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Scalene_angle1)
 		{
 			// testing findingAngles to create a the first angle of a scalene
-			// expected outcome of function:40.535797641604667 
+			// expected outcome of function:40.5358
 
 			double triangleSides[3] = { 7, 5, 10 };
-			double Expected = 40.535797641604667;
+			double Expected = 40.5358;
+			
 
 			double angle;
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
-			Assert::AreEqual(Expected, angle);
+
+			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
 
 
 
@@ -157,15 +161,15 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Scalene_angle2)
 		{
 			// testing findingAngles to create a the second angle of a scalene
-			// expected outcome of function:111.80373566125496 
+			// expected outcome of function:111.804
 
 			double triangleSides[3] = { 7, 5, 10 };
-			double Expected = 111.80373566125496;
+			double Expected = 111.804;
 
 
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.001);
 
 
 
@@ -176,16 +180,16 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Scalene_angle3)
 		{
 			// testing findingAngles to create a the Third angle of a scalene
-			// expected outcome of function:27.660446849299753
+			// expected outcome of function:27.66044
 
 			double triangleSides[3] = { 7, 5, 10 };
-			double Expected = 27.660446849299753;
+			double Expected = 27.6604;
 
 
 
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
 
 
 
@@ -195,14 +199,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Equilatoral_angle1)
 		{
 			// testing findingAngles to create a the first angle of a Equilatoral
-			// expected outcome of function:59.999993384053134
+			// expected outcome of function:60
 
 			double triangleSides[3] = { 7, 7, 7 };
-			double Expected = 59.999993384053134;
+			double Expected = 60;
 
 			double angle;
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
 
 
 
@@ -212,14 +216,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Equilatoral_angle2)
 		{
 			// testing findingAngles to create a the second angle of a Equilatoral
-			// expected outcome of function:59.999993384053134 
+			// expected outcome of function:60
 
 			double triangleSides[3] = { 7, 7, 7 };
-			double Expected = 59.999993384053134;
+			double Expected = 60;
 
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
 
 
 
@@ -229,14 +233,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Equilatoral_angle3)
 		{
 			// testing findingAngles to create a the third angle of a Equilatoral
-			// expected outcome of function:59.999993384053134 
+			// expected outcome of function:60 
 
 			double triangleSides[3] = { 7, 7, 7 };
-			double Expected = 59.999993384053134;
+			double Expected = 60;
 
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
 
 
 
@@ -247,14 +251,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Isosceles_angle1)
 		{
 			// testing findingAngles to create a the first angle of a Isosceles
-			// expected outcome of function:48.189679790548134
+			// expected outcome of function:48.1897
 
 			double triangleSides[3] = { 6, 6, 8 };
-			double Expected = 48.189679790548134;
+			double Expected = 48.1897;
 
 			double angle;
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
 
 
 
@@ -265,14 +269,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Isosceles_angle2)
 		{
 			// testing findingAngles to create a the second angle of a Isosceles
-			// expected outcome of function:83.620620571063128
+			// expected outcome of function:83.6206
 
 			double triangleSides[3] = { 6, 6, 8 };
-			double Expected = 83.620620571063128;
+			double Expected = 83.6206;
 
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
 
 
 
@@ -282,14 +286,14 @@ namespace PolygonCheckerTests
 		TEST_METHOD(findingAngles_Isosceles_angle3)
 		{
 			// testing findingAngles to create a the third angle of a Isosceles
-			// expected outcome of function:48.189679790548134
+			// expected outcome of function:48.1897
 
 			double triangleSides[3] = { 6, 6, 8 };
-			double Expected = 48.189679790548134;
+			double Expected = 48.1897;
 
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
-			Assert::AreEqual(Expected, angle);
+			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
 
 			
 		}
@@ -368,7 +372,66 @@ namespace PolygonCheckerTests
 
 
 
+		} 
+
+		//testing lengthChecker 
+		TEST_METHOD(lengthChecker_Invaild_Smaller)
+		{
+			// testing lengthChecker() with largest side being 9 and smaller sides being 7 and 1 
+			// the sum of the smaller sides are smaller than the largest side should not create a triangle
+			// expected outcome of function:false
+
+			double triangleSides[3] = { 9, 7, 1 };
+			bool Expected = false;
+			bool result;
+			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreEqual(Expected, result);
+
+
+
+
+
 		}
+
+		TEST_METHOD(lengthChecker_Vaild)
+		{
+			// testing lengthChecker() with largest side being 9 and smaller sides being 9 and 1 
+			//  the sum of the smaller sides will be larger than the largest side and should create a triangle
+			// expected outcome of function:True
+
+			double triangleSides[3] = { 9, 9, 1 };
+			bool Expected = true;
+			bool result;
+			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreEqual(Expected, result);
+
+
+
+
+
+		}
+
+		TEST_METHOD(lengthChecker_Invaild_Equal)
+		{
+			// testing lengthChecker() with largest side being 9 and smaller sides being 8 and 1 
+			//  the sum of the smaller sides will be equal to the largest side and should not create a triangle
+			// expected outcome of function:false
+
+			double triangleSides[3] = { 9, 8, 1 };
+			bool Expected = false;
+			bool result;
+			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
+
+			Assert::AreEqual(Expected, result);
+
+
+
+
+
+		}
+
 
 	};
 
