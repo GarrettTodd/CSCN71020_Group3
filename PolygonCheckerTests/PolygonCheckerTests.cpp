@@ -3,13 +3,35 @@
 
 #include <stdbool.h>
 
+#define MAX_POINTS 4
+#define A 0
+#define B 1
+#define C 2
+#define D 3
+
 extern "C"
 {
-
 	char* analyzeTriangle(double side1, double side2, double side3, bool*);
 	bool largestSide(double, double, double);
 	bool lengthChecker(double, double, double);
 	void findingAngles(double, double, double, double*);
+
+	typedef struct point
+	{
+		int x;
+		int y;
+	} Point;
+
+	int getValidInput(char[]);
+	void getPoints(Point[]);
+	bool analyzePoints(Point[]);
+	void reorderPoints(Point[]);
+	bool checkOrthogonality(Point, Point, Point);
+	void sortPoints(Point[]);
+	void swap(Point[], int, int);
+	double distanceBetween(Point, Point);
+	double getPerimeter(Point[]);
+	double getArea(Point[]);
 
 }
 
@@ -376,8 +398,304 @@ namespace PolygonCheckerTests
 	{
 	public:
 
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(distanceBetween_TwoDiffPoints)
 		{
+			Point a; 
+			a.x = 6;
+			a.y = 10;
+			Point b;
+			b.x = 12;
+			b.y = 4;
+
+			double expected = 8.485;
+			double result = distanceBetween(a,b);
+
+			Assert::AreEqual(expected, result, 3);
+		}
+		TEST_METHOD(distanceBetween_SamePoints)
+		{
+			Point a;
+			a.x = 7;
+			a.y = -4;
+			Point b;
+			b.x = 7;
+			b.y = -4;
+
+			double expected = 0.0;
+			double result = distanceBetween(a, b);
+
+			Assert::AreEqual(expected, result);
+		}
+		TEST_METHOD(distanceBetween_NegativeOnlyPoints)
+		{
+			Point a;
+			a.x = -7;
+			a.y = -15;
+			Point b;
+			b.x = -23;
+			b.y = -4;
+
+			double expected = 19.416488;
+			double result = distanceBetween(a, b);
+
+			Assert::AreEqual(expected, result, 3);
+		}
+		TEST_METHOD(distanceBetween_NegativeAndPositivePoints)
+		{
+			Point a;
+			a.x = 14;
+			a.y = -31;
+			Point b;
+			b.x = -9;
+			b.y = 17;
+
+			double expected = 53.225934;
+			double result = distanceBetween(a, b);
+
+			Assert::AreEqual(expected, result, 3);
+		}
+		TEST_METHOD(getPerimeter_NonRectangle)
+		{
+			Point points[4];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = 12;
+			points[1].y = 4;
+			points[2].x = 2;
+			points[2].y = -6;
+			points[3].x = -2;
+			points[3].y = 5;
+
+			double expected = 43.766;
+			double result = getPerimeter(points);
+
+			Assert::AreEqual(expected, result, 3);
+		}
+		TEST_METHOD(getPerimeter_DiagonalLineRectangle)
+		{
+			Point points[4];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = 12;
+			points[1].y = 4;
+			points[2].x = 4;
+			points[2].y = -4;
+			points[3].x = -2;
+			points[3].y = 2;
+
+			double expected = 39.598;
+			double result = getPerimeter(points);
+
+			Assert::AreEqual(expected, result, 3);
+		}
+		TEST_METHOD(getPerimeter_HorizontalandVerticalLineRectangle_66)
+		{
+			Point points[4];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -7;
+			points[2].y = -8;
+			points[3].x = 3;
+			points[3].y = -8;
+
+			double expected = 66.000;
+			double result = getPerimeter(points);
+
+			Assert::AreEqual(expected, result);
+		}
+		TEST_METHOD(getPerimeter_PointsEnteredAreSame_0)
+		{
+			Point points[4];
+			points[0].x = 4;
+			points[0].y = 9;
+			points[1].x = 4;
+			points[1].y = 9;
+			points[2].x = 4;
+			points[2].y = 9;
+			points[3].x = 4;
+			points[3].y = 9;
+
+			double expected = 0.0;
+			double result = getPerimeter(points);
+
+			Assert::AreEqual(expected, result);
+		}
+		TEST_METHOD(getArea_DiagonalLineRectangle_96)
+		{
+			Point points[3];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = -2;
+			points[1].y = 2;
+			points[2].x = 4;
+			points[2].y = -4;
+	
+			double expected = 96.000;
+			double result = getArea(points);
+
+			Assert::AreEqual(expected, result);
+		}
+		TEST_METHOD(getArea_HorizontalandVerticalLineRectangle_230)
+		{	
+			//assume points have been sorted as the sorting takes place before this function is called in program
+			Point points[3];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -7;
+			points[2].y = -8;
+
+			double expected = 230.000;
+			double result = getArea(points);
+
+			Assert::AreEqual(expected, result);
+		}
+		TEST_METHOD(checkOrthogonality_DiagonalLineRectangle)
+		{
+			Point points[3];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = -2;
+			points[1].y = 2;
+			points[2].x = 4;
+			points[2].y = -4;
+
+			Assert::IsTrue(checkOrthogonality(points[0], points[1], points[2]));
+		}
+		TEST_METHOD(checkOrthogonality_VerticalAndHorizontalLineRectangle)
+		{
+			Point points[3];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -7;
+			points[2].y = -8;
+
+			Assert::IsTrue(checkOrthogonality(points[0], points[1], points[2]));
+		}
+		TEST_METHOD(checkOrthogonality_AcuteAngle)
+		{
+			Point points[3];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -2;
+			points[2].y = -8;
+
+			Assert::IsFalse(checkOrthogonality(points[0], points[1], points[2]));
+		}
+		TEST_METHOD(checkOrthogonality_ObtuseAngle)
+		{
+			Point points[3];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -18;
+			points[2].y = -8;
+
+			Assert::IsFalse(checkOrthogonality(points[0], points[1], points[2]));
+		}
+		TEST_METHOD(checkOrthogonality_StraightAngle)
+		{
+			Point points[3];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -11;
+			points[2].y = -15;
+
+			Assert::IsFalse(checkOrthogonality(points[0], points[1], points[2]));
+		}
+		TEST_METHOD(analyzePoints_DiagonalLineRectangle)
+		{
+			Point points[4];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = 12;
+			points[1].y = 4;
+			points[2].x = 4;
+			points[2].y = -4;
+			points[3].x = -2;
+			points[3].y = 2;
+
+			Assert::IsTrue(analyzePoints(points));
+		}
+		TEST_METHOD(analyzePoints_VerticalAndHorizontalLineRectangle)
+		{
+			Point points[4];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = 15;
+			points[2].x = -7;
+			points[2].y = -8;
+			points[3].x = 3;
+			points[3].y = -8;
+
+			Assert::IsTrue(analyzePoints(points));
+		}
+		TEST_METHOD(analyzePoints_NonRectangle)
+		{
+			Point points[4];
+			points[0].x = 2;
+			points[0].y = 9;
+			points[1].x = 0;
+			points[1].y = 12;
+			points[2].x = -7;
+			points[2].y = 2;
+			points[3].x = 4;
+			points[3].y = -2;
+
+			Assert::IsFalse(analyzePoints(points));
+		}
+		TEST_METHOD(analyzePoints_DiagonalLineRectangle_PointsNotInOrder)
+		{
+			Point points[4];
+			points[0].x = 6;
+			points[0].y = 10;
+			points[1].x = 4;
+			points[1].y = -4;
+			points[2].x = -2;
+			points[2].y = 2;
+			points[3].x = 12;
+			points[3].y = 4;
+
+			Assert::IsTrue(analyzePoints(points));
+		}
+		TEST_METHOD(analyzePoints_VerticalAndHorizontalLineRectangle_PointsNotInOrder)
+		{
+			Point points[4];
+			points[0].x = 3;
+			points[0].y = 15;
+			points[1].x = -7;
+			points[1].y = -8;
+			points[2].x = 3;
+			points[2].y = -8;
+			points[3].x = -7;
+			points[3].y = 15;
+
+			Assert::IsTrue(analyzePoints(points));
+		}
+		TEST_METHOD(analyzePoints_AllSamePoints)
+		{
+			Point points[4];
+			points[0].x = 17;
+			points[0].y = -15;
+			points[1].x = 17;
+			points[1].y = -15;
+			points[2].x = 17;
+			points[2].y = -15;
+			points[3].x = 17;
+			points[3].y = -15;
+
+			Assert::IsFalse(analyzePoints(points));
 		}
 	};
 
