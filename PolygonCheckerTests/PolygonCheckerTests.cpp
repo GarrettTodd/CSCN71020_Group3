@@ -850,13 +850,5 @@ namespace PolygonCheckerTests
 
 	};
 
-	TEST_CLASS(MiscellaneousTests)
-	{
-	public:
-
-		TEST_METHOD(TestMethod1)
-		{
-		}
-	};
 }
 
