@@ -20,7 +20,7 @@ int main(void)
 			if (isRectangle)
 				printf("Area: %.3lf\n", getArea(points));
 			else
-				printf("The points doesn't form a rectangle.\n\n");
+				printf("The points does not form a rectangle.\n\n");
 			break;
 		case 2:
 			printf_s("Triangle selected.\n");
@@ -75,7 +75,7 @@ int printShapeMenu()
 	printf("2. Triangle\n");
 	printf("3. Exit\n\n");
 
-	int choice = getValidInput("> ");
+	int choice = (int)getValidInput("> ");
 
 	return choice;
 }

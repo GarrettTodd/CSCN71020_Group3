@@ -30,8 +30,6 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
-
 		}
 
 		TEST_METHOD(analyzeTriangle_Zero)
@@ -45,7 +43,6 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_Negative)
@@ -59,7 +56,6 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_Scalene)
@@ -73,7 +69,6 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_Equilateral)
@@ -87,7 +82,6 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_Isosceles)
@@ -101,12 +95,11 @@ namespace PolygonCheckerTests
 			char* Result = analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, Result);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_isTriangle_True)
 		{
-			// testing analyzeTriangle to create a equailatoral triangle where isTriangle is true 
+			// testing analyzeTriangle to create a equailateral triangle where isTriangle is true 
 			// expected outcome of function: isTriangle should be true
 
 			double triangleSides[3] = { 7, 7, 7 };
@@ -115,7 +108,6 @@ namespace PolygonCheckerTests
 			analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, isTriangle);
-
 		}
 
 		TEST_METHOD(analyzeTriangle_isTriangle_False)
@@ -129,7 +121,6 @@ namespace PolygonCheckerTests
 			analyzeTriangle(triangleSides[0], triangleSides[1], triangleSides[2], &isTriangle);
 
 			Assert::AreEqual(Expected, isTriangle);
-
 		}
 
 		//findingAngles 
@@ -147,10 +138,6 @@ namespace PolygonCheckerTests
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
 
 			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
-
-
-
-
 		}
 
 		TEST_METHOD(findingAngles_Scalene_angle2)
@@ -165,10 +152,6 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.001);
-
-
-
-
 		}
 
 
@@ -185,15 +168,11 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
-
-
-
-
 		}
 
-		TEST_METHOD(findingAngles_Equilatoral_angle1)
+		TEST_METHOD(findingAngles_Equilateral_angle1)
 		{
-			// testing findingAngles to create a the first angle of a Equilatoral
+			// testing findingAngles to create a the first angle of a Equilateral
 			// expected outcome of function:60
 
 			double triangleSides[3] = { 7, 7, 7 };
@@ -202,15 +181,11 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
-
-
-
-
 		}
 
-		TEST_METHOD(findingAngles_Equilatoral_angle2)
+		TEST_METHOD(findingAngles_Equilateral_angle2)
 		{
-			// testing findingAngles to create a the second angle of a Equilatoral
+			// testing findingAngles to create a the second angle of a Equilateral
 			// expected outcome of function:60
 
 			double triangleSides[3] = { 7, 7, 7 };
@@ -219,15 +194,11 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
-
-
-
-
 		}
 
-		TEST_METHOD(findingAngles_Equilatoral_angle3)
+		TEST_METHOD(findingAngles_Equilateral_angle3)
 		{
-			// testing findingAngles to create a the third angle of a Equilatoral
+			// testing findingAngles to create a the third angle of a Equilateral
 			// expected outcome of function:60 
 
 			double triangleSides[3] = { 7, 7, 7 };
@@ -236,10 +207,6 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.00001);
-
-
-
-
 		}
 
 
@@ -254,10 +221,6 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[0], triangleSides[1], triangleSides[2], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
-
-
-
-
 		}
 
 
@@ -272,10 +235,6 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[2], triangleSides[0], triangleSides[1], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
-
-
-
-
 		}
 
 		TEST_METHOD(findingAngles_Isosceles_angle3)
@@ -289,8 +248,6 @@ namespace PolygonCheckerTests
 			double angle;
 			findingAngles(triangleSides[1], triangleSides[2], triangleSides[0], &angle);
 			Assert::IsTrue(fabs(angle - Expected) < 0.0001);
-
-			
 		}
 
 		//Testing largestSide
@@ -306,11 +263,6 @@ namespace PolygonCheckerTests
 			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreNotEqual(NotEqual, result);
-
-			
-			
-
-
 		}
 
 		TEST_METHOD(largestSide_Scalene)
@@ -325,15 +277,10 @@ namespace PolygonCheckerTests
 			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreEqual(Expected , result);
-
-
-
-
-
 		}
-		TEST_METHOD(largestSide_Equilatoral)
+		TEST_METHOD(largestSide_Equilateral)
 		{
-			// testing LargestSide() with 7,7,7 that form a Equilatoral triangle 
+			// testing LargestSide() with 7,7,7 that form a Equilateral triangle 
 			// to verify the sum of the smaller sides are larger than the largest side
 			// expected outcome of function:True
 
@@ -343,11 +290,6 @@ namespace PolygonCheckerTests
 			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreNotEqual(NotExpected, result);
-
-
-
-
-
 		}
 
 		TEST_METHOD(largestSide_Isosceles)
@@ -362,11 +304,6 @@ namespace PolygonCheckerTests
 			result = largestSide(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreNotEqual(NotExpected, result);
-
-
-
-
-
 		} 
 
 		//testing lengthChecker 
@@ -382,11 +319,6 @@ namespace PolygonCheckerTests
 			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreEqual(Expected, result);
-
-
-
-
-
 		}
 
 		TEST_METHOD(lengthChecker_Vaild)
@@ -401,11 +333,6 @@ namespace PolygonCheckerTests
 			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreEqual(Expected, result);
-
-
-
-
-
 		}
 
 		TEST_METHOD(lengthChecker_Invaild_Equal)
@@ -420,14 +347,7 @@ namespace PolygonCheckerTests
 			result = lengthChecker(triangleSides[0], triangleSides[1], triangleSides[2]);
 
 			Assert::AreEqual(Expected, result);
-
-
-
-
-
 		}
-
-
 	};
 
 	TEST_CLASS(RectangleTests)
@@ -820,8 +740,5 @@ namespace PolygonCheckerTests
 
 			Assert::IsFalse(analyzePoints(points));
 		}
-
 	};
-
 }
-

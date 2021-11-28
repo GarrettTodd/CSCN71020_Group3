@@ -1,12 +1,13 @@
 #include "rectangleSolver.h"
 
-int getValidInput(char prompt[])
+double getValidInput(char prompt[])
 {
-	int input, temp;
+	double input;
+	int temp;
 	while (1)
 	{
 		printf("%s", prompt);
-		temp = scanf_s("%d", &input);
+		temp = scanf_s("%lf", &input);
 
 		// Checks if scanf didn't match any input and if the input contained any unwanted trailing characters.
 		if (temp != 1 || getchar() != 10)

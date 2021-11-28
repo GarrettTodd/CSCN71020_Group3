@@ -12,11 +12,11 @@
 
 typedef struct point
 {
-	int x;
-	int y;
+	double x;
+	double y;
 } Point;
 
-int getValidInput(char[]);
+double getValidInput(char[]);
 void getPoints(Point[]);
 bool analyzePoints(Point[]);
 void reorderPoints(Point[]);
